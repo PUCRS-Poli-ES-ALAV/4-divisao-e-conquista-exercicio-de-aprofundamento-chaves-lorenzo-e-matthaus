@@ -1,7 +1,7 @@
 package br.pucrs;
 
 public class MaxVal {
-    private static long recursiveIterations;
+    private static long numberComparisons;
     
     public static long maxVal1(long A[], int n) {
         double startTime = System.nanoTime();
@@ -17,25 +17,23 @@ public class MaxVal {
         double endTime = System.nanoTime();
         double duration = (endTime - startTime) / 1000000;
         System.out.println("maxVal1 duration: " + duration + "ms");
-        System.out.println("maxVal1 iterations: " + iterations);
+        System.out.println("maxVal1 comparisons: " + iterations);
         return max;
     }
 
     public static long maxVal2(long A[], int n) {
         double startTime = System.nanoTime();
-        recursiveIterations = 0;
+        numberComparisons = 0;
         long result = maxVal2Helper(A, 0, n-1);
         double endTime = System.nanoTime();
         double duration = (endTime - startTime) / 1000000;
         
         System.out.println("maxVal2 duration: " + duration + "ms");
-        System.out.println("maxVal2 iterations: " + recursiveIterations);
+        System.out.println("maxVal2 comparisons: " + numberComparisons);
         return result;
     }
     
     private static long maxVal2Helper(long A[], int init, int end) {
-        recursiveIterations++;
-        
         if (end - init <= 1) {
             return max(A[init], A[end]);  
         } else {
@@ -45,8 +43,9 @@ public class MaxVal {
             return max(v1, v2);
         }
     }
-
+    
     public static long max(long a, long b) {
+        numberComparisons++;
         return (a > b) ? a : b;
     }
 }
