@@ -28,3 +28,10 @@ A divisão e conquista é uma abordagem eficiente para ordenar vetores. O algori
 
 A divisão e conquista nem sempre é a melhor abordagem para resolver um problema. No caso de encontrar o maior valor em um vetor, por exemplo, sempre será necessário percorrer o vetor inteiro. Nesse caso, a abordagem iterativa é mais simples de implementar e mais eficiente.
 
+### Multiplicação de BigInts
+
+| Tamanho (bits) | Algoritmo  | Duration (ms) | Chamadas Recursivas | Resultado              |
+|----------------|------------|---------------|---------------------|------------------------|
+| 4              | Multiply   | 0.014792      | 21                  | 195                    |
+| 16             | Multiply   | 0.0295        | 341                 | 2,600,000,000          |
+| 32             | Multiply   | 0.118916      | 1,365               | 3,000,000,000,000,000,000 |
