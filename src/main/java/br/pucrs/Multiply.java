@@ -1,13 +1,15 @@
 package br.pucrs;
 
+import java.math.BigInteger;
+
 public class Multiply {
     private static long numberRecursiveCalls = 0;
     
-    public static long multiply(long x, long y, int n) {
+    public static BigInteger multiply(BigInteger x, BigInteger y, int n) {
         numberRecursiveCalls = 0;
         double startTime = System.nanoTime();
         
-        long result = multiplyHelper(x, y, n);
+        BigInteger result = multiplyHelper(x, y, n);
         
         double endTime = System.nanoTime();
         double duration = (endTime - startTime) / 1000000;
@@ -20,29 +22,35 @@ public class Multiply {
         return result;
     }
     
-    private static long multiplyHelper(long x, long y, int n) {
+    public static BigInteger multiply(long x, long y, int n) {
+        return multiply(BigInteger.valueOf(x), BigInteger.valueOf(y), n);
+    }
+    
+    private static BigInteger multiplyHelper(BigInteger x, BigInteger y, int n) {
         numberRecursiveCalls++;
         
         if (n == 1) {
-            return x * y;
+            return x.multiply(y);
         } else {
             int m = n / 2;
             
-            long powerOfTwo = (long) Math.pow(2, m);
+            BigInteger powerOfTwo = BigInteger.valueOf(2).pow(m);
             
-            long a = x / powerOfTwo;
-            long b = x % powerOfTwo;
-            long c = y / powerOfTwo;
-            long d = y % powerOfTwo;
+            BigInteger a = x.divide(powerOfTwo);
+            BigInteger b = x.remainder(powerOfTwo);
+            BigInteger c = y.divide(powerOfTwo);
+            BigInteger d = y.remainder(powerOfTwo);
             
-            long e = multiplyHelper(a, c, m);
-            long f = multiplyHelper(b, d, m);
-            long g = multiplyHelper(b, c, m);
-            long h = multiplyHelper(a, d, m);
+            BigInteger e = multiplyHelper(a, c, m);
+            BigInteger f = multiplyHelper(b, d, m);
+            BigInteger g = multiplyHelper(b, c, m);
+            BigInteger h = multiplyHelper(a, d, m);
             
-            long powerOfTwo2m = (long) Math.pow(2, 2 * m);
+            BigInteger powerOfTwo2m = BigInteger.valueOf(2).pow(2 * m);
             
-            return (powerOfTwo2m * e) + (powerOfTwo * (g + h)) + f;
+            return powerOfTwo2m.multiply(e)
+                   .add(powerOfTwo.multiply(g.add(h)))
+                   .add(f);
         }
     }
 }

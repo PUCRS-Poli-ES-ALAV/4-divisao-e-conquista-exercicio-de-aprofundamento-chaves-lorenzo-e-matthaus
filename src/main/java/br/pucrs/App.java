@@ -1,5 +1,7 @@
 package br.pucrs;
 
+import java.math.BigInteger;
+
 public class App 
 {
     public static void main( String[] args )
@@ -37,7 +39,7 @@ public class App
         int bits1 = 4;
         
         System.out.println("Test Case 1: " + x1 + " * " + y1 + " (4-bit numbers)");
-        long result1 = Multiply.multiply(x1, y1, bits1);
+        BigInteger result1 = Multiply.multiply(x1, y1, bits1);
         System.out.println("Expected: " + (x1 * y1));
         System.out.println();
         
@@ -46,7 +48,7 @@ public class App
         int bits2 = 16;
         
         System.out.println("Test Case 2: " + x2 + " * " + y2 + " (16-bit numbers)");
-        long result2 = Multiply.multiply(x2, y2, bits2);
+        BigInteger result2 = Multiply.multiply(x2, y2, bits2);
         System.out.println("Expected: " + (x2 * y2));
         System.out.println();
         
@@ -55,9 +57,20 @@ public class App
         int bits3 = 32;
         
         System.out.println("Test Case 3: " + x3 + " * " + y3 + " (32-bit numbers)");
-        long result3 = Multiply.multiply(x3, y3, bits3);
+        BigInteger result3 = Multiply.multiply(x3, y3, bits3);
         System.out.println("Expected: " + (x3 * y3));
-            
+        System.out.println();
+
+        long x4 = 1000000000000L;
+        long y4 = 5000000000000L;
+
+        int bits4 = 64;
+
+        System.out.println("Test Case 4: " + x4 + " * " + y4 + " (64-bit numbers)");
+        BigInteger result4 = Multiply.multiply(x4, y4, bits4);
+        BigInteger expected4 = BigInteger.valueOf(x4).multiply(BigInteger.valueOf(y4));
+        System.out.println("Expected: " + expected4);
+        System.out.println();
     }
 
     private static long[] buildRandArray(int size) {
